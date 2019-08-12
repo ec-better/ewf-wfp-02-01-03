@@ -1,0 +1,21 @@
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="application">
+  <jobTemplates>
+    <jobTemplate id="notebook">
+      <streamingExecutable>/application/notebook/run</streamingExecutable>
+      <defaultParameters><parameter id="N_1" title="No Aggregation" abstract="No aggregation" maxOccurs="1" scope="runtime" type="LiteralData">False</parameter><parameter id="N_3" title="30 Day Aggregation" abstract="Get a 30 day aggregation" maxOccurs="1" scope="runtime" type="LiteralData">True</parameter><parameter id="N_6" title="60 Day Aggregation" abstract="Get a 30 day aggregation" maxOccurs="1" scope="runtime" type="LiteralData">False</parameter><parameter id="regionOfInterest" title="WKT Polygon for the Region of Interest" abstract="Set the value of WKT Polygon" maxOccurs="1" scope="runtime" type="LiteralData">POLYGON((11.5030755518998 -11.1141633706909,41.0343255518998 -11.1141633706909,41.0343255518998 -34.9763656693858,11.5030755518998 -34.9763656693858,11.5030755518998 -11.1141633706909))</parameter><parameter id="nameOfRegion" title="Name of Region" abstract="Name of the region of interest" minOccurs="1" maxOccurs="1" scope="runtime" type="LiteralData">SouthernAfrica</parameter></defaultParameters>
+     <defaultJobconf>
+        <property id="mapred.task.timeout">9900000000000</property>
+        <property id="ciop.job.max.tasks">1</property> 
+     </defaultJobconf>
+    </jobTemplate>
+  </jobTemplates>
+  <workflow id="ewf-wfp-02-01-03" title="Long Term Averages of Land Surface Temperature Time Series" abstract="Long Term Averages of Land Surface Temperature Time Series">
+    <workflowVersion>1.0</workflowVersion>
+    <node id="notebook">
+      <job id="notebook"/>
+      <sources>
+        <source id="source" title="Input references" abstract="Input references" refid="string:list" scope="runtime"/>
+      </sources>
+    </node>
+  </workflow>
+</application>
