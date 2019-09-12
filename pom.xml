@@ -11,7 +11,7 @@
     <version>2.0.0</version>
   </parent>
   <description>Long Term Averages of Land Surface Temperature Time Series</description>
-  <version>0.5-SNAPSHOT</version>
+  <version>0.5</version>
   <properties>
     <summary>Long Term Averages of Land Surface Temperature Time Series</summary>
     <description>Long Term Averages of Land Surface Temperature Time Series</description>
