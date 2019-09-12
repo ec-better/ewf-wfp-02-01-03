@@ -14,7 +14,7 @@
     <node id="notebook">
       <job id="notebook"/>
       <sources>
-        <source id="source" title="Input references" abstract="Input references" refid="string:list" scope="runtime"/>
+        <source id="source" title="Input references" abstract="Input references" refid="string:list" scope="runtime">[https://catalog.terradue.com/modis/search?format=atom&amp;uid={0}.format(pid</source>
       </sources>
     </node>
   </workflow>
