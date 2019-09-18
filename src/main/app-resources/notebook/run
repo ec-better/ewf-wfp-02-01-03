@@ -223,8 +223,8 @@ def main():
       references.append(reference.rstrip())
     
     # vars to access catalog
-    global user
-    global apikey
+    global indexAggCat
+    global apikeyAggCat
     
     indexAggCat = ciop.getparam('indexAggCat')
     apikeyAggCat = ciop.getparam('apikeyAggCat')
