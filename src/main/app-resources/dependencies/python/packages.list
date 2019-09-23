@@ -46,9 +46,10 @@ cligj=0.4.0=py27_0
 cloudpickle=1.2.1=py_0
 clyent=1.2.2=py27_1
 colorama=0.4.1=py27_0
-conda=4.6.14=py27_0
+conda=4.7.12=py27_0
 conda-build=3.2.0=py27_0
 conda-env=2.6.0=h36134e3_1
+conda-package-handling=1.6.0=py27h7b6447c_0
 conda-verify=2.0.0=py27hf052a9d_0
 configparser=3.5.0=py27_0
 contextlib2=0.5.5=py27hbf4c468_0
@@ -427,6 +428,7 @@ testpath=0.3.1=py27_0
 tk=8.5.18=0
 toolz=0.10.0=py_0
 tornado=4.4.2=py27_0
+tqdm=4.32.1=py_0
 traitlets=4.3.2=py27_0
 typing=3.6.2=py27h66f49e2_0
 udunits2=2.2.25=hd30922c_1
