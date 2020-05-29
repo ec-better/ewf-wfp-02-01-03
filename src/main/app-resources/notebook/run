@@ -12,6 +12,8 @@ import nbformat as nbf
 import uuid
 import ast
 
+import pandas as pd
+
 from urlparse import urlparse
 
 sys.path.append('/opt/anaconda/bin/')
@@ -240,22 +242,25 @@ def main():
                            ('stop', enddate),
                            ('count', 'unlimited')])
     
-    #search_params['update'] = ciop.getparam('update')
+    search_params['update'] = ciop.getparam('update')
 
     
     ciop.log('INFO', 'Searching in: ' + catalogue_url)
     ciop.log('INFO', 'startdate: ' + startdate)
     ciop.log('INFO', 'enddate: ' + enddate)
+    
 
     search = ciop.search(end_point=catalogue_url, 
                          params=search_params,
-                         output_fields='self,identifier,startdate,enddate,enclosure,title,updated', pagination = 100,
-                         model='GeoTime',creds='{}:{}'.format(indexAggCat, apikeyAggCat))
-                         
-    
+                         output_fields='self,identifier,startdate,enddate,enclosure,title,updated',
+                         pagination = 100,
+                         model='GeoTime',
+                         creds='{}:{}'.format(indexAggCat, apikeyAggCat))
+
+
+
 
     input_metadata = pd.DataFrame.from_dict(search)
-    
     
     prods = input_metadata[input_metadata['title'].str.contains('_maxvalues_') | input_metadata['title'].str.contains('_averages_')]
     
