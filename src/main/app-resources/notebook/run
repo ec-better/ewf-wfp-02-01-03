@@ -12,6 +12,8 @@ import nbformat as nbf
 import uuid
 import ast
 
+import pandas as pd
+
 from urlparse import urlparse
 
 sys.path.append('/opt/anaconda/bin/')
@@ -219,8 +221,8 @@ def main():
     os.makedirs(tmp_dir)
   
     # Loops over all the inputs
-    for reference in sys.stdin:
-      references.append(reference.rstrip())
+    #for reference in sys.stdin:
+    #  references.append(reference.rstrip())
     
     # vars to access catalog
     global indexAggCat
@@ -228,6 +230,58 @@ def main():
     
     indexAggCat = ciop.getparam('indexAggCat')
     apikeyAggCat = ciop.getparam('apikeyAggCat')
+    
+    
+    startdate = ciop.getparam('startdate')
+    enddate = ciop.getparam('enddate')
+
+
+    catalogue_url = 'https://catalog.terradue.com/' + indexAggCat + '/search'
+    
+    search_params =  dict([('start', startdate),
+                           ('stop', enddate),
+                           ('count', 'unlimited')])
+    
+    search_params['update'] = ciop.getparam('update')
+
+    
+    ciop.log('INFO', 'Searching in: ' + catalogue_url)
+    ciop.log('INFO', 'startdate: ' + startdate)
+    ciop.log('INFO', 'enddate: ' + enddate)
+    
+
+    search = ciop.search(end_point=catalogue_url, 
+                         params=search_params,
+                         output_fields='self,identifier,startdate,enddate,enclosure,title,updated',
+                         pagination = 100,
+                         model='GeoTime',
+                         creds='{}:{}'.format(indexAggCat, apikeyAggCat))
+
+
+
+
+    input_metadata = pd.DataFrame.from_dict(search)
+    
+    prods = input_metadata[input_metadata['title'].str.contains('_maxvalues_') | input_metadata['title'].str.contains('_averages_')]
+    
+    prods = prods[prods['title'].str.contains('_{}_'.format(ciop.getparam('nameOfRegion')))]
+    
+    
+    nlist = [ciop.getparam('N_1'), ciop.getparam('N_3'), ciop.getparam('N_6'), ciop.getparam('N_9'), ciop.getparam('N_12'), ciop.getparam('N_15'), ciop.getparam('N_18'), ciop.getparam('N_27'), ciop.getparam('N_36')]
+    nlist = [n == 'True' for n in nlist]
+    nvalues = [1, 3, 6, 9, 12, 15, 18, 27, 36]
+    
+    for nv,ntf in zip(nvalues,nlist):
+        if ntf:
+            prods = prods[prods['title'].str.contains('_N{}_'.format(nv))]
+            break;
+
+
+    for r in prods['self'].tolist():
+        references.append(r)
+        
+    ciop.log('INFO', 'Found: ' + str(len(references)) + ' references')
+
 
     
     # stage-in the data
