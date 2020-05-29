@@ -264,6 +264,8 @@ def main():
     
     prods = input_metadata[input_metadata['title'].str.contains('_maxvalues_') | input_metadata['title'].str.contains('_averages_')]
     
+    prods = prods[prods['title'].str.contains('_{}_'.format(ciop.getparam('nameOfRegion')))]
+    
     
     nlist = [ciop.getparam('N_1'), ciop.getparam('N_3'), ciop.getparam('N_6'), ciop.getparam('N_9'), ciop.getparam('N_12'), ciop.getparam('N_15'), ciop.getparam('N_18'), ciop.getparam('N_27'), ciop.getparam('N_36')]
     nlist = [n == 'True' for n in nlist]
