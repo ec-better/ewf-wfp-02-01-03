@@ -254,6 +254,7 @@ def main():
                          params=search_params,
                          output_fields='self,identifier,startdate,enddate,enclosure,title,updated',
                          pagination = 100,
+                         timeout=300000,
                          model='GeoTime',
                          creds='{}:{}'.format(indexAggCat, apikeyAggCat))
 
