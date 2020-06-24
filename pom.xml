@@ -11,7 +11,7 @@
     <version>3.0.1-docker</version>
   </parent>
   <description>Long Term Averages of Land Surface Temperature Time Series</description>
-  <version>0.9</version>
+  <version>0.10</version>
   <properties>
     <summary>Long Term Averages of Land Surface Temperature Time Series</summary>
     <description>Long Term Averages of Land Surface Temperature Time Series</description>
@@ -107,12 +107,10 @@
                   <requires>
                     <require>fftw</require>
                     <require>miniconda</require>
-                    <require>OTB</require>
                     <require>java-1.8.0-openjdk-devel</require>
-                    <require>snap6</require>
                   </requires>
                   <postinstallScriptlet combine.self="override">
-                    <script>conda update conda -y &amp;&amp; conda install -y --file /application/dependencies/python/packages.list &amp;&amp; cp /application/notebook/etc/snappy.ini /opt/anaconda/lib/python2.7/site-packages/snappy/snappy.ini</script>
+                    <script>conda update conda -y &amp;&amp; conda install -y --file /application/dependencies/python/packages.list</script>
                   </postinstallScriptlet>
                 </configuration>
               </execution>
